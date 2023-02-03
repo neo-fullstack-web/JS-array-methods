@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Arrays</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Métodos de Arrays</h1>
+
+    <div class="container">
+        <section class="command-container">
+            <div>
+                <button class="btn" onclick="metodoMap()">Método Map</button>
+            </div>
+
+            <div class="input-container">
+                <label for="filter">Filtrar</label> <br>
+                <input class="input-field" type="text" id="filter" onkeyup="metodoFilter(event)">
+                <!-- <button class="btn" onclick="metodoFilter()">Filtrar Paises</button> -->
+            </div>
+
+            <div class="input-container">
+                <label for="find">Buscar</label> <br>
+                <input class="input-field" type="text" id="find" onkeyup="metodoFind(event)">
+                
+            </div>
+
+            <div class="input-container">
+                <label for="find">Buscar Indice</label> <br>
+                <input class="input-field" type="text" id="find" onkeyup="metodoFindIndex(event)">
+               
+            </div>
+        </section>
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del país</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+   
+
+    <script src="/js/array-methods.js"></script>
+</body>
+</html>
