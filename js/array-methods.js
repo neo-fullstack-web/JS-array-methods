@@ -1,51 +1,108 @@
 const paisesLatam = [ 
-    "Argentina",
-    "Bolivia",
-    "Brasil",
-    "Chile",
-    "Colombia",
-    "Guyana",
-    "Guyana Francesa",
-    "Paraguay",
-    "Ecuador",
-    "Perú",
-    "Suriname",
-    "Uruguay",
-    "Venezuela",
+    { name: "Perú", population: 33715471},
+    { name: "Colombia", population: 51516562 },
+    { name: "Paraguay", population: 6703799},
+    { name: "Bolivia", population: 12079472},
+    { name: "Guyana Francesa", population: 560230},
+    { name: "Venezuela", population: 28199867},
+    { name: "Suriname", population: 612985},
+    { name: "Chile", population: 19493184},
+    { name: "Uruguay", population: 3426260},
+    { name: 'Argentina',  population: 45808747 },
+    { name: "Guyana", population: 804567 },
+    { name: "Brasil", population: 214326223 },
+    { name: "Ecuador", population: 17797737},
 ];
-
-// **No usar
-// let paisesDuplicado = paisesLatam;
-// **Opciones para copiar array y romper la referencia del original
-let paisesDuplicado = Array.from(paisesLatam)
-// let paisesDuplicado = [ ...paisesLatam ]
-// let paisesDuplicado = paisesLatam.slice()
-// let paisesDuplicado = paisesLatam.map((pais) => { return pais });
-
-
-paisesDuplicado[2] = true;
-paisesDuplicado.push(`**NUEVO`)
-
-console.log(`paisesLatam`, paisesLatam);
-console.log(`paisesDuplicado`, paisesDuplicado);
 
 
 let tableBody = document.getElementById('table-body');
-// let index = 1;
 
-//** Array.forEach => Otra forma de iterar un array
+pintarTabla(paisesLatam);
+calcularTotalPoblacion(paisesLatam);
 
-pintarTabla(paisesLatam)
+function pintarTabla(arrayAPintar) {
+
+    tableBody.innerHTML = '';
+
+    arrayAPintar.forEach((pais, indice) => {
+            tableBody.innerHTML += `<tr>
+                <td><strong>${indice + 1}</strong></td>
+                <td>${ pais.name }</td>
+                <td>${ pais.population }</td>
+            </tr>`;
+        })
+
+        console.log(`DESPUES DEL MAP`, paisesLatam)
+}
+
+
+
+function calcularTotalPoblacion(paisesAContar) {
+    // Contar población
+    const sumaTotal = paisesAContar.reduce((acumulador, pais) => {
+        const sumatoria = acumulador + pais.population;
+        return sumatoria
+    }, 0);
+    
+    // Pintarla en el div corresponiente
+    console.log(`sumatoriaTotal:`, sumaTotal);
+    document.querySelector('#population-number').innerHTML = sumaTotal
+}
+
+
+
+
+
+
+
+
+
+const arrayCopia = paisesLatam
+
 
 function metodoMap() {
     
     const arrayNuevoMap = paisesLatam.map(function(pais) {
-        const paisMay = pais.toUpperCase();
-        return paisMay
+
+        const newObj = {
+            name: pais.name.toUpperCase(),
+            population:  Math.round(pais.population * 10  / 1000000) / 10 + 'M'
+        }
+
+        // !Solución no válida ya que se modifican los objetos del array Original
+        // pais.name = pais.name.toUpperCase();
+        // pais.population = Math.round(pais.population * 10  / 1000000) / 10 + 'M'
+
+        return newObj
     });
 
+    console.log(arrayNuevoMap)
     pintarTabla(arrayNuevoMap)
 }
+
+
+
+
+
+
+// //** Array.forEach => Otra forma de iterar un array
+// // **No usar
+// // let paisesDuplicado = paisesLatam;
+// // **Opciones para copiar array y romper la referencia del original
+// let paisesDuplicado = Array.from(paisesLatam)
+// // let paisesDuplicado = [ ...paisesLatam ]
+// // let paisesDuplicado = paisesLatam.slice()
+// // let paisesDuplicado = paisesLatam.map((pais) => { return pais });
+
+// paisesDuplicado[2] = true;
+// paisesDuplicado.push(`**NUEVO`)
+
+// console.log(`paisesLatam`, paisesLatam);
+// console.log(`paisesDuplicado`, paisesDuplicado);
+
+
+
+// // let index = 1;
 
 function metodoFilter(evt) {
     // Frenando la busqueda si la tecla no es la que tiene codigo 13 (ENTER)
@@ -54,13 +111,16 @@ function metodoFilter(evt) {
     //     return;
     // }
     const text = evt.target.value.toLowerCase();
+
     const paisesFiltrados = paisesLatam.filter((pais) => {
-        const filtra = pais.toLowerCase().includes(text);
+        console.log(pais)
+        const filtra = pais.name.toLowerCase().includes(text);
+
         return filtra;
+
     });
-
     pintarTabla(paisesFiltrados)
-
+    calcularTotalPoblacion(paisesFiltrados)
 }
 
 function metodoFind(evt) {
@@ -69,15 +129,18 @@ function metodoFind(evt) {
 
     const texto = evt.target.value.toLowerCase().trim();  // ArGENtina => `argentina` === `argentina`
     const paisEncotrado = paisesLatam.find((pais)=> {
-        if(texto === pais.toLowerCase()) {
+        if(texto === pais.name.toLowerCase()) {
             return true;
         }
         
         return false
     });
 
-    if(paisEncotrado) alert(`Se encontró el país que busca`)
-    else alert(`No se encontró lo que buscaba`)
+    if(paisEncotrado) {
+        pintarTabla([ paisEncotrado ] );
+        calcularTotalPoblacion([ paisEncotrado ])
+    }
+    // else alert(`No se encontró lo que buscaba`)
 }
 
 function metodoFindIndex(evt) {
@@ -100,20 +163,17 @@ function metodoFindIndex(evt) {
     pintarTabla(paisesLatam)
 }
 
-
-function pintarTabla(arrayAPintar) {
-    tableBody.innerHTML = '';
-    arrayAPintar.forEach((pais, indice) => {
-        tableBody.innerHTML += `<tr>
-            <td><strong>${indice + 1}</strong></td>
-             <td>${ pais }</td>
-         </tr>`;
+const ordenarPor = () => {
+    paisesLatam.sort((a, b) => {
+       
     })
 }
 
 
-// for(let i = 0; i < paisesLatam.length; i++) {
+
+
+// // for(let i = 0; i < paisesLatam.length; i++) {
 
     
 
-// }
+// // }

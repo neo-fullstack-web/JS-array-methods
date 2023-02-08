@@ -21,7 +21,6 @@
                 <input class="input-field" type="text" id="filter" onkeyup="metodoFilter(event)">
                 <!-- <button class="btn" onclick="metodoFilter()">Filtrar Paises</button> -->
             </div>
-
             <div class="input-container">
                 <label for="find">Buscar</label> <br>
                 <input class="input-field" type="text" id="find" onkeyup="metodoFind(event)">
@@ -33,6 +32,13 @@
                 <input class="input-field" type="text" id="find" onkeyup="metodoFindIndex(event)">
                
             </div>
+
+            <div>
+                <button class="btn btn-alter" onclick="ordernarPor()">Nombre 🔽</button>
+                <button class="btn btn-alter" onclick=""></button>
+                <button class="btn btn-alter" onclick=""></button>
+                <button class="btn btn-alter" onclick=""></button>
+            </div>
         </section>
         <section class="table-container">
             <table>
@@ -40,12 +46,21 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre del país</th>
+                        <th>Población</th>
                     </tr>
                 </thead>
                 <tbody id="table-body">
 
                 </tbody>
             </table>
+
+
+            <div class="population-count">
+                <p>Total de población </p>
+                <h1 class="population-number" id="population-number">
+                    --
+                </h1>
+            </div>
         </section>
 
     </div>
