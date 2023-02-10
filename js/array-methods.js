@@ -15,7 +15,9 @@ const paisesLatam = [
 ];
 
 
+
 let tableBody = document.getElementById('table-body');
+
 
 pintarTabla(paisesLatam);
 calcularTotalPoblacion(paisesLatam);
@@ -110,13 +112,14 @@ function metodoFilter(evt) {
     //     console.log(`No apreto enter`);
     //     return;
     // }
+    const number = 30000000 //input
     const text = evt.target.value.toLowerCase();
 
     const paisesFiltrados = paisesLatam.filter((pais) => {
         console.log(pais)
-        const filtra = pais.name.toLowerCase().includes(text);
-
-        return filtra;
+        // const filtra = pais.name.toLowerCase().includes(text);
+        const filtrados = pais.population > number
+        return filtrados;
 
     });
     pintarTabla(paisesFiltrados)
@@ -163,10 +166,64 @@ function metodoFindIndex(evt) {
     pintarTabla(paisesLatam)
 }
 
-const ordenarPor = () => {
+// Hacer un ordenamiento por nombre de manera descendente
+const ordenarDesc = () => {
     paisesLatam.sort((a, b) => {
-       
-    })
+        if(a.name > b.name) return -1;
+        if(a.name < b.name) return 1;
+        return 0;
+    });
+    pintarTabla(paisesLatam)
+}
+
+function ordenarAsc() {
+    paisesLatam.sort((a, b) => {
+        if(a.name > b.name) return 1;
+        if(a.name < b.name) return -1;
+        return 0;
+    });
+    pintarTabla(paisesLatam)
+}
+
+function ordenarDescPoblacion() {
+    paisesLatam.sort((a, b) => {
+        if(a.population > b.population) return -1;
+        if(a.population < b.population) return 1;
+        return 0;
+    });
+    pintarTabla(paisesLatam)
+}
+
+function ordenarAscPoblacion() {
+    paisesLatam.sort((a, b) => {
+        if(a.population > b.population) return 1;
+        if(a.population < b.population) return -1;
+        return 0;
+    });
+    pintarTabla(paisesLatam)
+}
+
+
+function ordenarPor(prop, order) {
+    // if(order === 'asc') value = 1;
+    // else value = -1;
+
+    // Operador ternario para hacer una if else de 1 sola línea
+    value = order === 'asc' ? 1 : -1;
+
+    paisesLatam.sort((a, b) => {
+        // Cuando necesito acceder dinamicamente mediante una variable a las propiedades de una objeto 
+        // utilizo el acceso al valor de las propiedades mediante indice nombrado objecto['propiedad']
+        if(a[prop] > b[prop]) return value;
+        if(a[prop] < b[prop]) return -value;
+        return 0;
+    });  
+
+    pintarTabla(paisesLatam)
+}
+
+for(let pais of paisesLatam) {
+    console.log(`For OF:`, pais)
 }
 
 
