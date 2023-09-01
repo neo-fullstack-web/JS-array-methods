@@ -1,15 +1,23 @@
-/* * {
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-} */
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: #111;
 }
+
 
 .container {
     display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.container > section{
+  flex: 1 0 0%;
 }
 
 .command-container {
@@ -27,11 +35,12 @@ body {
 }
 
 .population-count {
-  border: 3px solid rgb(44, 117, 4);
+  border: 3px solid rgb(0, 0, 0);
   margin-top: 1rem;
+  color: white;
   text-align: center;
   padding: .5rem;
-  background-color: #e6ffbe;
+  background-color: #2e2e2e;
 }
 
 .population-number {
@@ -44,9 +53,11 @@ body {
     padding: .5rem 1rem;
     color: white;
     border-radius: 4px;
-    background-color: cornflowerblue;
+    background-color: crimson;
     transition: .3s all ease-in;
     margin-bottom: 1rem;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -63,37 +74,40 @@ table {
     width: 100%;
   }
   th {
-    background-color: rgb(37, 160, 28);
+    background-color: crimson;
     color: white;
   }
   td, th {
-    border: 1px solid #dddddd;
+    border: 1px solid #dddddd33;
     text-align: left;
     padding: 8px;
   }
   
   tr:nth-child(even) {
-    background-color: #e6ffbe;
+    background-color: #333;
   }
   .input-container {
     margin-bottom: 2rem;
+    color: white;
   }
   .input-container label {
     font-weight: bold;
-    color: #555;
   }
   .input-field {
     padding: .25rem 0;
     border: 0;
-    border-bottom: 1px solid #f9214a;
+    border-bottom: 3px solid #f9214a;
     outline: 0;
     background: transparent;
-    color: #555555;
+    color: #DDD;
     font-size: 1rem;
     line-height: 1.5rem;
     transition: all .5s cubic-bezier(.4, .25, .8, .3);
     width: min(100%, 400px);
+    border-image-slice: 1;
   }
+
+
 
   input::selection {
     background: rgba(#f9214a, 0.25);
@@ -103,6 +117,30 @@ table {
     opacity: 1;
     pointer-events: auto;
     z-index: 10;
+    animation: border-glow infinite;
+    animation-duration: 3s;
+  }
+
+  @keyframes border-glow {
+    /* Create a border glow and linear color change animation */
+    0% {
+      border-image: linear-gradient(to right, yellow, rgb(239, 103, 36), crimson);
+      border-image-slice: 1;
+    }
+    33% {
+      border-image: linear-gradient(to right, crimson, yellow, rgb(239, 103, 36));
+      border-image-slice: 1;
+    }
+    66% {
+      border-image: linear-gradient(to right,  rgb(239, 103, 36), crimson, yellow,);
+      border-image-slice: 1;
+    }
+    100% {
+      border-image: linear-gradient(to right, yellow, rgb(239, 103, 36), crimson);
+      border-image-slice: 1;
+    }
+
+
   }
 
   input:focus ~ label .label-text {
